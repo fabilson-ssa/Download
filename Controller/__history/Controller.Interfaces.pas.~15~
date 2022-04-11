@@ -1,0 +1,43 @@
+﻿unit Controller.Interfaces;
+
+interface
+
+uses Data.DB,
+     DownloadApp.Types;
+
+type
+
+  iDownloadObserver = interface;
+
+  iControllerIdHTTP = interface
+    ['{8E0A1212-F541-4000-8CD1-AEC1E4689F43}']
+
+    procedure StartDownload(strUrl, strDestino: String);
+    procedure StopDownload;
+    function IsDownloading: Boolean;
+    procedure AddObserver(Observer: iDownloadObserver);
+  end;
+
+  iControllerData = interface
+    ['{C1ADA7C3-D6D3-4F30-A9F4-2FBEEE5B8EB0}']
+
+    function GetAllRecords: TDataSet;
+  end;
+
+  iDownloadObserver = interface
+    ['{D22BE5B6-1B35-4929-A51B-36BB72283868}']
+
+    procedure Atualizar(ResultadoDownload: TDownloadRecord);
+  end;
+
+  iDownloadSubjet = interface
+    ['{458BCD93-64C4-4BAE-AD6E-577BD773820B}']
+
+    procedure AddObserver(Observer: iDownloadObserver);
+    procedure RemoveObserver(Observer: iDownloadObserver);
+    procedure Notificar(ResultadoDownload: TDownloadRecord);
+  end;
+
+implementation
+
+end.

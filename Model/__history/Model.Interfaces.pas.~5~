@@ -1,0 +1,20 @@
+﻿unit Model.Interfaces;
+
+interface
+
+uses Controller.Interfaces;
+
+type
+
+  iModelIdHTTP = interface
+    ['{7FD51C9B-0AEC-4815-A4B1-EA318713F5B8}']
+
+    procedure FazerDownloadDoArquivo(strUrl, strDestino: String);
+    procedure StopDownload;
+    function GetObserver: iDownloadSubjet;
+    function IsDownloading: Boolean;
+  end;
+
+implementation
+
+end.

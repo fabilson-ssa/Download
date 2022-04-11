@@ -1,0 +1,49 @@
+﻿unit Model.LogDownload;
+
+interface
+
+uses SysUtils, DateUtils, System.Variants;
+
+type
+
+  TModelLogDownload = class
+  private
+    { Private declarations }
+
+    FCodigo: Int64;
+    FURL: String;
+    FDataInicio: TDateTime;
+    FDataFim: TDateTime;
+  public
+    { Public declarations }
+
+    // Construtor da classe.
+    constructor Create;
+    // Destrutor da classe.
+    destructor Destroy; override;
+
+    property Codigo: Int64 read FCodigo write FCodigo;
+    property URL: String read FURL write FURL;
+    property DataInicio: TDateTime read FDataInicio write FDataInicio;
+    property DataFim: TDateTime read FDataFim write FDataFim;
+
+  end;
+
+implementation
+
+{ TModelLogDownload }
+
+constructor TModelLogDownload.Create;
+begin
+  FCodigo := 0;
+  FURL := '';
+  FDataInicio := Now;
+  FDataFim := VarFromDateTime(0.0);
+end;
+
+destructor TModelLogDownload.Destroy;
+begin
+  inherited;
+end;
+
+end.

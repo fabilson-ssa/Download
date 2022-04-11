@@ -1,0 +1,48 @@
+﻿unit Controller.Data;
+
+interface
+
+uses Data.DB,
+     Controller.Interfaces,
+     Model.Database;
+
+type
+
+  TControllerData = class(TInterfacedObject, iControllerData)
+    private
+      FModelDados: TDatabase;
+    public
+      constructor Create;
+      destructor Destroy; override;
+      class function New: iControllerData;
+      function RetornaHistorico: TDataSet;
+  end;
+
+implementation
+
+uses System.SysUtils;
+
+{ TControllerData }
+constructor TControllerData.Create;
+begin
+  FModelDados := TDatabase.Create(nil);
+end;
+
+destructor TControllerData.Destroy;
+begin
+  FreeAndNil(FModelDados);
+
+  inherited;
+end;
+
+class function TControllerData.New: iControllerData;
+begin
+  result := Self.Create;
+end;
+
+function TControllerData.RetornaHistorico: TDataSet;
+begin
+  result :=  FModelDados.TodosOsDownloads;
+end;
+
+end.

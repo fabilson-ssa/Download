@@ -1,0 +1,44 @@
+﻿unit DownloadApp.Types;
+
+interface
+
+uses
+  System.SysUtils;
+
+type
+{$SCOPEDENUMS ON}
+  TDownloadStatus = (Downloading, stFinished, stSuccess);
+{$SCOPEDENUMS OFF}
+
+  TDownloadStatusHelper = record helper for TDownloadStatus
+    function ToString: String;
+  end;
+
+  FDownloadException = class(Exception);
+
+  TDownloadRecord = record
+    Progress: Int64;
+    ProgressKbytes: Real;
+    ProgressPercentage: Real;
+    ProgressoMaximo: Int64;
+    ErrorMessage: String;
+    Status: TDownloadStatus;
+  end;
+
+implementation
+
+function TDownloadStatusHelper.ToString: String;
+begin
+  case Self of
+    TDownloadStatus.Downloading:
+      Result := 'Baixando';
+
+    TDownloadStatus.stFinished:
+      Result := 'Finalizado';
+
+    TDownloadStatus.stSuccess:
+      Result := 'Finalizado com sucesso';
+  end;
+end;
+
+end.

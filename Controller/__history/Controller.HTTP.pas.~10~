@@ -1,0 +1,73 @@
+﻿unit Controller.HTTP;
+
+interface
+
+uses DownloadApp.Types, Controller.Interfaces,
+     Model.Interfaces, Model.HTTP;
+
+type
+
+  TControllerIdHTTP = class(TInterfacedObject, iControllerIdHTTP)
+
+  private
+    FModelIdHTTP: iModelIdHTTP;
+
+  public
+    // Construtor da classe.
+    constructor Create;
+
+    // Destrutor da classe.
+    destructor Destroy; override;
+
+    // Método responsável por criar uma nova instância do objeto.
+    // Uma class function permite que o método possa ser chamado a partir da própria classe, sem a necessidade de se instanciar um objeto dela.
+    class function New: iControllerIdHTTP;
+
+    procedure FazerDownloadDoArquivo(strUrl, strDestino: String);
+    procedure StopDownload;
+    procedure AddObserver(Observer: iDownloadObserver);
+    function EstaExecutando: Boolean;
+  end;
+
+implementation
+
+{ TControllerIdHTTP }
+
+procedure TControllerIdHTTP.AddObserver(Observer: iDownloadObserver);
+begin
+  FModelIdHTTP.GetObserver.AddObserver(Observer);
+end;
+
+constructor TControllerIdHTTP.Create;
+begin
+  FModelIdHTTP := TModelIdHTTP.New;
+end;
+
+destructor TControllerIdHTTP.Destroy;
+begin
+  inherited;
+end;
+
+function TControllerIdHTTP.EstaExecutando: Boolean;
+begin
+  Result := FModelIdHTTP.IsDownloading;
+end;
+
+procedure TControllerIdHTTP.FazerDownloadDoArquivo(strUrl, strDestino: String);
+begin
+  FModelIdHTTP.FazerDownloadDoArquivo(strUrl, strDestino);
+end;
+
+class function TControllerIdHTTP.New: iControllerIdHTTP;
+begin
+  result := Self.Create;
+end;
+
+procedure TControllerIdHTTP.StopDownload;
+begin
+  FModelIdHTTP.StopDownload;
+end;
+
+end.
+
+

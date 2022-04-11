@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2022/02/09 20:35:14.000.921,=C:\Users\Fabio\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2022/04/08 16:43:53.000.069,=C:\Users\Fabio\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2022/04/08 16:44:39.000.364,C:\DownloadApp\Main.dfm=C:\Users\Fabio\Documents\Embarcadero\Studio\Projects\Unit1.dfm</Transaction>
+    <Transaction>2022/04/08 16:44:39.000.364,C:\DownloadApp\Main.pas=C:\Users\Fabio\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2022/04/08 16:44:54.000.438,C:\DownloadApp\DownloadApp.dproj=C:\Users\Fabio\Documents\Embarcadero\Studio\Projects\Project1.dproj</Transaction>
+    <Transaction>2022/04/08 16:53:05.000.089,=C:\DownloadApp\Unit1.pas</Transaction>
+    <Transaction>2022/04/08 16:56:59.000.772,C:\DownloadApp\View\Main.dfm=C:\DownloadApp\Main.dfm</Transaction>
+    <Transaction>2022/04/08 16:56:59.000.772,C:\DownloadApp\View\Main.pas=C:\DownloadApp\Main.pas</Transaction>
+    <Transaction>2022/04/08 16:58:21.000.807,C:\DownloadApp\Controller\Interfaces.pas=C:\DownloadApp\Unit1.pas</Transaction>
+    <Transaction>2022/04/08 16:59:00.000.739,C:\DownloadApp\Controller\Controller.Interfaces.pas=C:\DownloadApp\Controller\Interfaces.pas</Transaction>
+    <Transaction>2022/04/08 16:59:16.000.809,=C:\DownloadApp\Unit1.pas</Transaction>
+    <Transaction>2022/04/08 16:59:53.000.002,C:\DownloadApp\Types\DownloadApp.Types.pas=C:\DownloadApp\Unit1.pas</Transaction>
+    <Transaction>2022/04/08 17:12:33.000.273,=C:\DownloadApp\Unit1.pas</Transaction>
+    <Transaction>2022/04/08 17:13:37.000.414,=C:\DownloadApp\Unit2.pas</Transaction>
+    <Transaction>2022/04/08 18:08:53.000.781,C:\DownloadApp\Unit2.pas=C:\DownloadApp\Model\Model.Database.pas</Transaction>
+    <Transaction>2022/04/08 18:13:17.000.723,C:\DownloadApp\Unit1.pas=C:\DownloadApp\Controller\Controller.Dados.pas</Transaction>
+    <Transaction>2022/04/08 18:20:10.000.469,=C:\DownloadApp\Unit1.pas</Transaction>
+    <Transaction>2022/04/08 18:20:54.000.204,C:\DownloadApp\Unit1.pas=C:\DownloadApp\Model\Model.Interfaces.pas</Transaction>
+    <Transaction>2022/04/08 18:28:51.000.264,C:\DownloadApp\Controller\Controller.Dados.pas=C:\DownloadApp\Controller\Controller.Data.pas</Transaction>
+    <Transaction>2022/04/08 18:34:40.000.402,=C:\DownloadApp\Unit1.pas</Transaction>
+    <Transaction>2022/04/08 18:36:17.000.768,=C:\DownloadApp\Unit2.pas</Transaction>
+    <Transaction>2022/04/08 18:36:32.000.356,C:\DownloadApp\Unit2.pas=C:\DownloadApp\Model\Model.HTTP.pas</Transaction>
+    <Transaction>2022/04/08 18:40:05.000.805,C:\DownloadApp\Unit1.pas=C:\DownloadApp\Controller\Controller.HTTP.pas</Transaction>
+    <Transaction>2022/04/08 19:06:09.000.990,=C:\DownloadApp\Unit1.pas</Transaction>
+    <Transaction>2022/04/08 19:08:54.000.905,C:\DownloadApp\Exception\ExceptionHandler.pas=C:\DownloadApp\Unit1.pas</Transaction>
+    <Transaction>2022/04/08 22:54:54.000.738,=C:\DownloadApp\Unit1.pas</Transaction>
+    <Transaction>2022/04/08 22:56:16.000.700,=C:\DownloadApp\Unit2.pas</Transaction>
+    <Transaction>2022/04/09 11:34:38.000.029,=C:\DownloadApp\Unit1.pas</Transaction>
+    <Transaction>2022/04/09 11:42:12.000.264,C:\DownloadApp\Unit1.pas=C:\DownloadApp\Model\Model.Download.pas</Transaction>
+    <Transaction>2022/04/09 17:53:41.000.136,C:\DownloadApp\Controller\Controller.Database.pas=C:\DownloadApp\Controller\Controller.Data.pas</Transaction>
+    <Transaction>2022/04/09 18:36:55.000.323,C:\DownloadApp\Controller\Controller.HTTPRequest.pas=C:\DownloadApp\Controller\Controller.HTTP.pas</Transaction>
+    <Transaction>2022/04/09 19:38:55.000.077,C:\DownloadApp\Model\Model.HTTPRequest.pas=C:\DownloadApp\Model\Model.HTTP.pas</Transaction>
+    <Transaction>2022/04/09 19:48:05.000.617,=C:\DownloadApp\Unit1.pas</Transaction>
+    <Transaction>2022/04/09 19:59:25.000.140,C:\DownloadApp\Model\Model.LogDownload.pas=C:\DownloadApp\Unit1.pas</Transaction>
+    <Transaction>2022/04/10 10:56:11.000.592,=C:\DownloadApp\Unit1.pas</Transaction>
+    <Transaction>2022/04/10 11:00:57.000.677,C:\DownloadApp\Utils\Utils.Download.pas=C:\DownloadApp\Unit1.pas</Transaction>
+    <Transaction>2022/04/11 19:31:55.000.020,C:\DownloadApp\DownloadApp.dproj=C:\DownloadApp\Download.dproj</Transaction>
+    <Transaction>2022/04/11 19:32:34.000.680,C:\DownloadApp\Types\DownloadApp.Types.pas=C:\DownloadApp\Types\Download.Types.pas</Transaction>
+    <Transaction>2022/04/11 20:27:03.956,C:\DownloadApp\Utils\Download.Utils.pas=C:\DownloadApp\Utils\Utils.Download.pas</Transaction>
+  </Transactions>
+	<ProjectSortOrder AutoSort="0" SortType="0">
+    <File Path="Controller"/>
+    <File Path="Controller\Controller.Database.pas"/>
+    <File Path="Controller\Controller.HTTPRequest.pas"/>
+    <File Path="Controller\Controller.Interfaces.pas"/>
+    <File Path="Exception"/>
+    <File Path="Exception\ExceptionHandler.pas"/>
+    <File Path="Model"/>
+    <File Path="Model\Model.Database.pas"/>
+    <File Path="Model\Model.Database.dfm"/>
+    <File Path="Model\Model.Download.pas"/>
+    <File Path="Model\Model.HTTPRequest.pas"/>
+    <File Path="Model\Model.Interfaces.pas"/>
+    <File Path="Model\Model.LogDownload.pas"/>
+    <File Path="Types"/>
+    <File Path="Types\Download.Types.pas"/>
+    <File Path="Utils"/>
+    <File Path="Utils\Download.Utils.pas"/>
+    <File Path="View"/>
+    <File Path="View\Main.pas"/>
+    <File Path="View\Main.dfm"/>
+  </ProjectSortOrder>
+</BorlandProject>

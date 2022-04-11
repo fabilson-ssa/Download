@@ -1,0 +1,280 @@
+﻿unit Model.HTTP;
+
+interface
+
+uses System.Generics.Collections, System.Threading,
+
+     IdBaseComponent, IdComponent,
+     IdTCPConnection, IdTCPClient, IdHTTP,
+     IdAuthentication, IdAntiFreezeBase,
+     IdAntiFreeze, IdIOHandler, IdIOHandlerStack,
+     IdIOHandlerSocket, IdSSL, IdSSLOpenSSL,
+
+     Model.Interfaces, Model.Database, Model.Download,
+     DownloadApp.Types, Controller.Interfaces;
+
+type
+  TModelHTTP = class(TInterfacedObject, IModelHTTP, IDownloadSubjet)
+
+  private
+    FIdDatabase: LongInt;
+    FIdHTTP: TIdHTTP;
+    FIdSSHandler: TIdSSLIOHandlerSocketOpenSSL;
+    FDatabase: TDatabase;
+    FTask: ITask;
+    // Objeto responsável por impedir o congelamento da aplicação, enquanto aguardamos o final do download.
+    IdAntiFreeze: TIdAntiFreeze;
+//    FDownloadNotificacao: TDownloadRecord;
+//    FResFuture: IFuture<TDownloadRecord>;
+    FResFuture: IFuture<TDownload>;
+    FObservers: TList<IDownloadObserver>;
+
+    FDownload: TDownload;
+
+    procedure FIdHTTPWork(ASender: TObject; AWorkMode: TWorkMode; AWorkCount: Int64);
+    procedure FIdHTTPWorkBegin(ASender: TObject; AWorkMode: TWorkMode; AWorkCountMax: Int64);
+    procedure FIdHTTPWorkEnd(ASender: TObject; AWorkMode: TWorkMode);
+    function Porcentagem(intValorMaximo, intValorAtual: real): real;
+    function KiloBytes(intValorAtual: real): real;
+
+  public
+    // Construtor da classe.
+    constructor Create;
+
+    // Destrutor da classe.
+    destructor Destroy; override;
+
+    // Método responsável por criar uma nova instância do objeto.
+    // Uma class function permite que o método possa ser chamado a partir da própria classe, sem a necessidade de se instanciar um objeto dela.
+    class function New: IModelHTTP;
+
+    // Método responsável por realizar o download do arquivo.
+    procedure StartDownload(url, destiny: String);
+
+    // Método responsável por parar o download do arquivo.
+    procedure StopDownload;
+
+    // Método responsável por retornar se existe algum donwload em andamento.
+    function IsDownloading: Boolean;
+
+    procedure AddObserver(Observer: IDownloadObserver);
+    procedure RemoveObserver(Observer: IDownloadObserver);
+    function GetObserver: IDownloadSubjet;
+
+//    procedure NotifyObserver(ResultadoDownload: TDownloadRecord);
+    procedure NotifyObserver(ResultadoDownload: TDownload);
+
+  end;
+
+implementation
+
+uses System.SysUtils, System.Classes;
+
+{ TModelIdHTTP }
+
+constructor TModelHTTP.Create;
+begin
+  FIdHTTP := TIdHTTP.Create(nil);
+  FIdSSHandler := TIdSSLIOHandlerSocketOpenSSL.Create(nil);
+  FIdSSHandler.SSLOptions.Method := sslvSSLv23;
+  FIdHTTP.IOHandler := FIdSSHandler;
+  FIdHTTP.OnWork := FIdHTTPWork;
+  FIdHTTP.OnWorkBegin := FIdHTTPWorkBegin;
+  FIdHTTP.OnWorkEnd := FIdHTTPWorkEnd;
+
+  // Inicialização do objeto responsável pelo acesso ao banco de dados.
+  FDatabase:= TDatabase.Create(nil);
+  FIdDatabase := 0;
+
+  FDownload := TDownload.Create;
+  FDownload.ProgressKbytes := 0;
+  FDownload.ProgressPercentage := 0;
+  FDownload.ProgressoMax := 0;
+
+//  FDownloadNotificacao.ProgressKbytes := 0;
+//  FDownloadNotificacao.ProgressPercentage := 0;
+//  FDownloadNotificacao.ProgressoMaximo := 0;
+
+  IdAntiFreeze := TIdAntiFreeze.Create(nil);
+
+  FObservers := TList<IDownloadObserver>.Create;
+end;
+
+destructor TModelHTTP.Destroy;
+begin
+  FreeAndNil(FObservers);
+  FreeAndNil(FIdSSHandler);
+  FreeAndNil(FIdHTTP);
+  FreeAndNil(IdAntiFreeze);
+  FreeAndNil(FDatabase);
+
+  FreeAndNil(FDownload);
+
+  inherited;
+end;
+
+function TModelHTTP.IsDownloading: Boolean;
+begin
+  Result := False;
+
+  if Assigned(FTask) then
+    result := (FTask.Status = TTaskStatus.Running);
+end;
+
+procedure TModelHTTP.FIdHTTPWork(ASender: TObject; AWorkMode: TWorkMode; AWorkCount: Int64);
+begin
+  FTask.CheckCanceled;
+
+  FDownload.Status := TDownloadStatus.Downloading;
+  FDownload.ProgressKbytes := KiloBytes(AWorkCount);
+  FDownload.ProgressPercentage := Porcentagem(FDownload.ProgressoMax, AWorkCount);
+  FDownload.Progress := AWorkCount;
+
+//  FDownloadNotificacao.Status := TDownloadStatus.Downloading;
+//  FDownloadNotificacao.ProgressKbytes := KiloBytes(AWorkCount);
+//  FDownloadNotificacao.ProgressPercentage := Porcentagem(FDownloadNotificacao.ProgressoMaximo, AWorkCount);
+//  FDownloadNotificacao.Progress := AWorkCount;
+
+//  NotifyObserver(FDownloadNotificacao);
+
+  NotifyObserver(FDownload);
+end;
+
+function TModelHTTP.Porcentagem(intValorMaximo, intValorAtual: real): real;
+begin
+  Result := ((intValorAtual * 100) / intValorMaximo);
+end;
+
+function TModelHTTP.KiloBytes(intValorAtual: real): real;
+begin
+  Result := ((intValorAtual / 1024) / 1024);
+end;
+
+procedure TModelHTTP.FIdHTTPWorkBegin(ASender: TObject; AWorkMode: TWorkMode; AWorkCountMax: Int64);
+begin
+//  FDownloadNotificacao.Status := TDownloadStatus.Downloading;
+//  FDownloadNotificacao.ProgressoMaximo := AWorkCountMax;
+
+//  NotifyObserver(FDownloadNotificacao);
+
+  FDownload.Status := TDownloadStatus.Downloading;
+  FDownload.ProgressoMax := AWorkCountMax;
+
+  NotifyObserver(FDownload);
+end;
+
+procedure TModelHTTP.FIdHTTPWorkEnd(ASender: TObject; AWorkMode: TWorkMode);
+begin
+  if not (FTask.Status = TTaskStatus.Canceled) then
+    begin
+      FDatabase.SetDownloadEnd(FIdDatabase, Now);
+
+//      FDownloadNotificacao.ProgressPercentage := 100;
+//      FDownloadNotificacao.ProgressoMaximo := 0;
+//      FDownloadNotificacao.Status := TDownloadStatus.Succeeded;
+//
+//      NotifyObserver(FDownloadNotificacao);
+
+      FDownload.ProgressPercentage := 100;
+      FDownload.ProgressoMax := 0;
+      FDownload.Status := TDownloadStatus.Succeeded;
+
+      NotifyObserver(FDownload);
+    end;
+end;
+
+procedure TModelHTTP.StartDownload(url, destiny: String);
+begin
+  if url.IsEmpty or destiny.isEmpty then
+    raise FDownloadException.Create('Parâmetros vazios em TModelIdHTTP.StartDownload');
+
+  // Realiza a inclusão do registro na base de dados, responsável pelo controle do início do download.
+  FIdDatabase := FDatabase.SetDownloadStart(url, Now);
+
+  FTask := TTask.Create(
+                          procedure
+                            begin
+                              TThread.Synchronize(TThread.CurrentThread,
+                              procedure
+                              var
+                                FileDownload : TFileStream;
+                              begin
+                                FileDownload := TFileStream.Create(destiny, fmCreate);
+                                try
+                                  FIdHTTP.CleanupInstance;
+                                  try
+                                    FIdHTTP.Get(url, fileDownload);
+                                  except
+                                    on E:Exception do
+                                      begin
+//                                        FDownloadNotificacao.Status := TDownloadStatus.Finished;
+                                        FDownload.Status := TDownloadStatus.Finished;
+
+                                        if Lowercase(e.Message) <> 'operation cancelled' then
+//                                          FDownloadNotificacao.ErrorMessage := e.Message;
+                                          FDownload.ErrorMessage := e.Message;
+
+//                                        NotifyObserver(FDownloadNotificacao);
+                                        NotifyObserver(FDownload);
+                                      end;
+                                  end;
+                                finally
+                                  FreeAndNil(fileDownload);
+                                end;
+                              end
+                              );
+                            end
+                       );
+
+  try
+    FTask.Start;
+  except
+    on E:Exception do
+    begin
+//      FDownloadNotificacao.ErrorMessage := 'Erro ao rodar thread: ' + e.Message;
+//      FDownloadNotificacao.Status := TDownloadStatus.Finished;
+//      NotifyObserver(FDownloadNotificacao);
+
+      FDownload.ErrorMessage := 'Erro ao rodar a thread: ' + e.Message;
+      FDownload.Status := TDownloadStatus.Finished;
+      NotifyObserver(FDownload);
+    end;
+  end;
+end;
+
+class function TModelHTTP.New: IModelHTTP;
+begin
+  Result := Self.Create;
+end;
+
+//procedure TModelHTTP.NotifyObserver(ResultadoDownload: TDownloadRecord);
+procedure TModelHTTP.NotifyObserver(ResultadoDownload: TDownload);
+var Observer: IDownloadObserver;
+begin
+  for Observer in FObservers do
+    begin
+      Observer.Atualizar(ResultadoDownload);
+    end;
+end;
+
+procedure TModelHTTP.StopDownload;
+begin
+  FTask.Cancel;
+end;
+
+procedure TModelHTTP.AddObserver(Observer: IDownloadObserver);
+begin
+  FObservers.Add(Observer);
+end;
+
+procedure TModelHTTP.RemoveObserver(Observer: IDownloadObserver);
+begin
+  FObservers.Delete(FObservers.IndexOf(Observer));
+end;
+
+function TModelHTTP.GetObserver: IDownloadSubjet;
+begin
+  Result := Self;
+end;
+
+end.

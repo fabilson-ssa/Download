@@ -1,0 +1,56 @@
+﻿unit Controller.Data;
+
+interface
+
+uses Data.DB,
+     Controller.Interfaces,
+     Model.Database;
+
+type
+
+  TControllerData = class(TInterfacedObject, IControllerDatabase)
+    private
+      FModelDatabase: TDatabase;
+    public
+      // Construtor da classe.
+      constructor Create;
+
+      // Destrutor da classe.
+      destructor Destroy; override;
+
+    // Método responsável por criar uma nova instância do objeto.
+    // Uma class function permite que o método possa ser chamado a partir da própria classe, sem a necessidade de se instanciar um objeto dela.
+      class function New: IControllerDatabase;
+
+      function GetAllRecords: TDataSet;
+  end;
+
+implementation
+
+uses System.SysUtils;
+
+{ TControllerData }
+
+constructor TControllerData.Create;
+begin
+  FModelDatabase := TDatabase.Create(nil);
+end;
+
+destructor TControllerData.Destroy;
+begin
+  FreeAndNil(FModelDatabase);
+
+  inherited;
+end;
+
+class function TControllerData.New: IControllerDatabase;
+begin
+  result := Self.Create;
+end;
+
+function TControllerData.GetAllRecords: TDataSet;
+begin
+  result :=  FModelDatabase.GetDatasetDownloads;
+end;
+
+end.

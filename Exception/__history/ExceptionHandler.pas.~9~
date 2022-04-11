@@ -1,0 +1,31 @@
+﻿unit ExceptionHandler;
+
+interface
+uses
+  System.SysUtils;
+type
+  TExceptionHandler = class
+    private
+    public
+      // Construtor da classe.
+      constructor Create;
+
+      procedure TrataException(Sender: TObject; E: Exception);
+
+  end;
+implementation
+
+uses
+  Vcl.Forms, System.Classes, Vcl.Dialogs;
+
+{ TExceptionHandler }
+constructor TExceptionHandler.Create;
+begin
+end;
+
+procedure TExceptionHandler.TrataException(Sender: TObject; E: Exception);
+begin
+
+end;
+
+end.

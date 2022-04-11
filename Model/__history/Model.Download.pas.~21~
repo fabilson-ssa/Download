@@ -1,0 +1,52 @@
+﻿unit Model.Download;
+
+interface
+
+uses DownloadApp.Types;
+
+type
+
+  TModelDownload = class
+  private
+    { Private declarations }
+
+    FStatus: TDownloadStatus;
+    FProgressBytes: Int64;
+    FFileSize: Int64;
+    FProgressPercentage: Real;
+    FErrorMessage: String;
+  public
+    { Public declarations }
+
+    // Construtor da classe.
+    constructor Create;
+    // Destrutor da classe.
+    destructor Destroy; override;
+
+    property Status: TDownloadStatus read FStatus write FStatus;
+    property CurrentFileSize: Int64 read FProgressBytes write FProgressBytes;
+    property FileSize: Int64 read FFileSize write FFileSize;
+    property ProgressPercentage: Real read FProgressPercentage write FProgressPercentage;
+    property ErrorMessage: String read FErrorMessage write FErrorMessage;
+
+  end;
+
+implementation
+
+{ TModelDownload }
+
+constructor TModelDownload.Create;
+begin
+  FStatus := TDownloadStatus.Null;
+  FProgressBytes := 0;
+  FFileSize := 0;
+  FProgressPercentage := 0;
+  FErrorMessage := '';
+end;
+
+destructor TModelDownload.Destroy;
+begin
+  inherited;
+end;
+
+end.

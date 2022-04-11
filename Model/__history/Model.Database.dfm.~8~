@@ -1,0 +1,32 @@
+object Database: TDatabase
+  OnCreate = DataModuleCreate
+  OnDestroy = DataModuleDestroy
+  Height = 259
+  Width = 398
+  PixelsPerInch = 96
+  object Connection: TFDConnection
+    Params.Strings = (
+      'LockingMode=Normal'
+      'Database=C:\DownloadApp\bin\database\database.db'
+      'DriverID=SQLite')
+    LoginPrompt = False
+    Left = 72
+    Top = 16
+  end
+  object Query: TFDQuery
+    Connection = Connection
+    SQL.Strings = (
+      'select * from logdownload')
+    Left = 72
+    Top = 88
+  end
+  object FDPhysSQLiteDriverLink: TFDPhysSQLiteDriverLink
+    Left = 224
+    Top = 17
+  end
+  object FDGUIxWaitCursor: TFDGUIxWaitCursor
+    Provider = 'Forms'
+    Left = 224
+    Top = 88
+  end
+end

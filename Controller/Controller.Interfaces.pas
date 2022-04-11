@@ -1,0 +1,47 @@
+﻿unit Controller.Interfaces;
+
+interface
+
+uses Data.DB,
+     Model.Download;
+
+type
+
+  IDownloadObserver = interface;
+
+  // Interface responsável por definir a assinatura de métodos das classes que serão observadoras.
+  IDownloadObserver = interface
+   ['{40FFACF8-D9FD-4185-B606-9FA558190F1B}']
+
+   procedure NotifyDownload(Download: TModelDownload);
+  end;
+
+  // Interface responsável por definir a assinatura de métodos das classes que serão observáveis.
+  IDownloadSubjet = interface
+    ['{E4EB1193-EBAF-4F83-9087-16F22BA257AE}']
+
+    procedure AddObserver(Observer: IDownloadObserver);
+    procedure RemoveObserver(Observer: IDownloadObserver);
+    procedure NotifyObserver(Download: TModelDownload);
+  end;
+
+  // Interface responsável por definir a assinatura de métodos das classes que farão todo o processo de HTTP Request.
+  IControllerHTTPRequest = interface
+    ['{37D1597A-D202-477B-9004-943D8FEC2527}']
+
+    procedure StartDownload(url, destiny: String);
+    procedure StopDownload;
+    procedure AddObserver(Observer: IDownloadObserver);
+    function IsDownloading: Boolean;
+  end;
+
+  // Interface responsável por definir a assinatura de métodos das classes que farão acesso a base de dados.
+  IControllerDatabase = interface
+    ['{A92BE5BC-6788-4A85-BF3F-48CC603C2C6B}']
+
+    function GetAllRecords: TDataSet;
+  end;
+
+implementation
+
+end.

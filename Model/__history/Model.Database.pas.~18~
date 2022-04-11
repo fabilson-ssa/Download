@@ -1,0 +1,107 @@
+﻿unit Model.Database;
+
+interface
+
+uses
+  System.SysUtils, System.Classes, FireDAC.Stan.Intf, FireDAC.Stan.Option,
+  FireDAC.Stan.Error, FireDAC.UI.Intf, FireDAC.Phys.Intf, FireDAC.Stan.Def,
+  FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.Phys, FireDAC.Phys.SQLite,
+  FireDAC.Phys.SQLiteDef, FireDAC.Stan.ExprFuncs, FireDAC.VCLUI.Wait,
+  FireDAC.Stan.Param, FireDAC.DatS, FireDAC.DApt.Intf, FireDAC.DApt, Data.DB,
+  FireDAC.Comp.DataSet, FireDAC.Comp.Client, FireDAC.Comp.UI,
+  FireDAC.Phys.SQLiteWrapper.Stat,
+  Model.Interfaces;
+
+type
+  TDatabase = class(TDataModule)
+    Connection: TFDConnection;
+    FDGUIxWaitCursor: TFDGUIxWaitCursor;
+    FDPhysSQLiteDriverLink: TFDPhysSQLiteDriverLink;
+    Query: TFDQuery;
+
+    procedure DataModuleCreate(Sender: TObject);
+    procedure DataModuleDestroy(Sender: TObject);
+  private
+    { Private declarations }
+
+  public
+    { Public declarations }
+
+    // Método responsável por registrar em banco de dados, o início do download.
+    function SetDownloadStart(url: String; start_date: TDateTime): Int64;
+    procedure SetDonwloadEnd(code: Int64; end_date: TDateTime);
+    function GetDatasetDownloads: TDataSet;
+  end;
+
+var Database: TDatabase;
+
+implementation
+
+uses Vcl.Forms;
+
+{$R *.dfm}
+
+procedure TDatabase.DataModuleCreate(Sender: TObject);
+begin
+  Connection.Connected := False;
+  Connection.Params.Database := ExtractFilePath(Application.ExeName) + 'database\database.db';
+  Connection.Connected := True;
+end;
+
+procedure TDatabase.DataModuleDestroy(Sender: TObject);
+begin
+  Query.Close;
+  Connection.Connected := False;
+end;
+
+procedure TDatabase.SetDonwloadEnd(code: Int64; end_date: TDateTime);
+begin
+  // Atualiza na base de dados o registro referente ao final do download do arquivo.
+  Query.Close;
+  Query.SQL.Clear;
+
+  Query.SQL.Add(' update logdownload ');
+  Query.SQL.Add(' set datafim = :datafim ');
+  Query.SQL.Add(' where codigo = :codigo ');
+
+  Query.ParamByName('datafim').Value := end_date;
+  Query.ParamByName('codigo').Value := code;
+
+  Query.ExecSQL;
+end;
+
+function TDatabase.SetDownloadStart(url: String; start_date: TDateTime): Int64;
+begin
+  // Insere na base de dados o registro referente ao início do download do arquivo.
+  Query.Close;
+  Query.SQL.Clear;
+
+  Query.SQL.Add(' insert into logdownload ');
+  Query.SQL.Add(' (url, datainicio) ');
+  Query.SQL.Add(' values (:url, :datainicio) ');
+
+  Query.ParamByName('url').Value := url;
+  Query.ParamByName('datainicio').Value := start_date;
+  Query.ExecSQL;
+
+  Query.Close;
+  Query.SQL.Clear;
+  Query.SQL.Text := ' select max(codigo) as codigo from logdownload ';
+  Query.Open;
+  Result := Query.FieldByName('codigo').AsLargeInt;
+end;
+
+function TDatabase.GetDatasetDownloads: TDataSet;
+begin
+  // Recupera todos os registros de log, referente aos arquivos baixados.
+  Query.Close;
+  Query.SQL.Clear;
+
+  Query.SQL.Add(' select codigo, cast(url as character varying(600)) as url, datainicio, datafim ');
+  Query.SQL.Add(' from logdownload ');
+  Query.SQL.Add(' order by datafim desc ');
+
+  Result := Query;
+end;
+
+end.

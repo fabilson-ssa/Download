@@ -1,0 +1,22 @@
+﻿unit DownloadApp.Types;
+
+interface
+
+uses
+  System.SysUtils;
+
+type
+  TStatus = (stFinalizadoComSucesso, stFinished, stDownloading);
+
+  EDownloadException = class(Exception);
+
+  TResultadoDownload = record
+    Progresso: Int64;
+    ProgressoKiloBytes: Real;
+    ProgressoPorcentagem: Real;
+    ProgressoMaximo: Int64;
+    MsgErro: String;
+    Status: TStatus;
+  end;
+implementation
+end.
