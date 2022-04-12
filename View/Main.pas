@@ -59,6 +59,7 @@ type
     btnExcecao4: TButton;
     btnExcecao5: TButton;
     Panel1: TPanel;
+    Memo1: TMemo;
     procedure FormCreate(Sender: TObject);
     procedure sbIniciarClick(Sender: TObject);
     procedure sbPararClick(Sender: TObject);
