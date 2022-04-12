@@ -12,6 +12,7 @@ object MainForm: TMainForm
   Font.Height = -11
   Font.Name = 'Tahoma'
   Font.Style = []
+  OldCreateOrder = True
   Position = poScreenCenter
   OnClose = FormClose
   OnCreate = FormCreate
@@ -157,10 +158,8 @@ object MainForm: TMainForm
           Width = 58
           Height = 53
           Hint = 'Selecionar diret'#243'rio padr'#227'o para download'
-          DisabledImages = VirtualImageList48
           ImageAlignment = iaCenter
           ImageIndex = 0
-          ImageName = 'opened-folder'
           Images = VirtualImageList48
           ParentShowHint = False
           ShowHint = True
@@ -520,7 +519,6 @@ object MainForm: TMainForm
             BiDiMode = bdLeftToRight
             ImageAlignment = iaCenter
             ImageIndex = 1
-            ImageName = 'play'
             Images = VirtualImageList48
             ParentBiDiMode = False
             ParentShowHint = False
@@ -541,11 +539,9 @@ object MainForm: TMainForm
             Enabled = False
             ImageAlignment = iaCenter
             ImageIndex = 3
-            ImageName = 'stop'
             Images = VirtualImageList48
             ParentShowHint = False
             PressedImageIndex = 6
-            PressedImageName = 'stop_grayed'
             ShowHint = True
             TabOrder = 1
             OnClick = sbPararClick
@@ -556,6 +552,10 @@ object MainForm: TMainForm
     object tsHistorico: TTabSheet
       Caption = 'Hist'#243'rico'
       ImageIndex = 2
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object grdHistorico: TDBGrid
         AlignWithMargins = True
         Left = 5
@@ -636,27 +636,82 @@ object MainForm: TMainForm
         TabOrder = 1
       end
     end
+    object TabSheet1: TTabSheet
+      Caption = 'Teste Exce'#231#245'es'
+      ImageIndex = 2
+      object Button1: TButton
+        Left = 8
+        Top = 8
+        Width = 220
+        Height = 40
+        Caption = 'Gerar exce'#231#227'o de convers'#227'o'
+        TabOrder = 0
+        OnClick = Button1Click
+      end
+      object Button2: TButton
+        Left = 8
+        Top = 66
+        Width = 220
+        Height = 40
+        Caption = 'Gerar exce'#231#227'o de divis'#227'o por zero'
+        TabOrder = 1
+        OnClick = Button2Click
+      end
+      object Button3: TButton
+        Left = 8
+        Top = 124
+        Width = 220
+        Height = 40
+        Caption = 'Gerar exce'#231#227'o de '#237'ndice de lista'
+        TabOrder = 2
+        OnClick = Button3Click
+      end
+      object Button4: TButton
+        Left = 8
+        Top = 182
+        Width = 220
+        Height = 40
+        Caption = 'Gerar exce'#231#227'o de arquivo n'#227'o encontrado'
+        TabOrder = 3
+        OnClick = Button4Click
+      end
+      object Button5: TButton
+        Left = 8
+        Top = 240
+        Width = 220
+        Height = 40
+        Caption = 'Gerar exce'#231#227'o de campo n'#227'o encontrado'
+        TabOrder = 4
+        OnClick = Button5Click
+      end
+    end
   end
   object VirtualImageList16: TVirtualImageList
+    DisabledGrayscale = False
+    DisabledSuffix = '_Disabled'
     Images = <
       item
         CollectionIndex = 0
         CollectionName = 'opened-folder'
+        Disabled = False
         Name = 'opened-folder'
       end
       item
         CollectionIndex = 1
         CollectionName = 'play'
+        Disabled = False
         Name = 'play'
       end
       item
         CollectionIndex = 2
         CollectionName = 'pause'
+        Disabled = False
         Name = 'pause'
       end
       item
         CollectionIndex = 3
         CollectionName = 'stop'
+        Disabled = False
         Name = 'stop'
       end>
     ImageCollection = ImageCollection
@@ -883,40 +938,49 @@ object MainForm: TMainForm
     Top = 336
   end
   object VirtualImageList48: TVirtualImageList
+    DisabledGrayscale = False
+    DisabledSuffix = '_Disabled'
     Images = <
       item
         CollectionIndex = 0
         CollectionName = 'opened-folder'
+        Disabled = False
         Name = 'opened-folder'
       end
       item
         CollectionIndex = 1
         CollectionName = 'play'
+        Disabled = False
         Name = 'play'
       end
       item
         CollectionIndex = 2
         CollectionName = 'pause'
+        Disabled = False
         Name = 'pause'
       end
       item
         CollectionIndex = 3
         CollectionName = 'stop'
+        Disabled = False
         Name = 'stop'
       end
       item
         CollectionIndex = 4
         CollectionName = 'play_grayed'
+        Disabled = False
         Name = 'play_grayed'
       end
       item
         CollectionIndex = 5
         CollectionName = 'pause_grayed'
+        Disabled = False
         Name = 'pause_grayed'
       end
       item
         CollectionIndex = 6
         CollectionName = 'stop_grayed'
+        Disabled = False
         Name = 'stop_grayed'
       end>
     ImageCollection = ImageCollection

@@ -12,7 +12,7 @@ uses
   FireDAC.Phys.SQLiteDef, FireDAC.Stan.ExprFuncs, FireDAC.VCLUI.Wait,
   FireDAC.Stan.Param, FireDAC.DatS, FireDAC.DApt.Intf, FireDAC.DApt,
   FireDAC.Comp.DataSet, FireDAC.Comp.Client, FireDAC.Comp.UI,
-  FireDAC.Phys.SQLiteWrapper.Stat, FireDAC.VCLUI.Error,
+  FireDAC.VCLUI.Error,
   FireDAC.Moni.Base, FireDAC.Moni.RemoteClient,
   Model.LogDownload;
 

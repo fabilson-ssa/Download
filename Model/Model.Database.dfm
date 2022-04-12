@@ -1,9 +1,9 @@
 object ModelDatabase: TModelDatabase
+  OldCreateOrder = True
   OnCreate = DataModuleCreate
   OnDestroy = DataModuleDestroy
   Height = 259
   Width = 485
-  PixelsPerInch = 96
   object Connection: TFDConnection
     Params.Strings = (
       'LockingMode=Normal'
