@@ -1,0 +1,219 @@
+Data/Hora.......: 11/04/2022 21:49:33
+Mensagem........: Erro de conversão de tipo
+Classe Exceção..: EDownloadException
+Formulário......: MainForm
+Unit............: Vcl.ComCtrls
+Controle Visual.: Button1
+Usuario.........: Fabio
+Versão Windows..: Windows 10
+----------------------------------------------------------------------
+Data/Hora.......: 11/04/2022 22:05:25
+Mensagem........: Erro de conversão de tipo
+Classe Exceção..: EDownloadException
+Formulário......: MainForm
+Unit............: Vcl.ComCtrls
+Controle Visual.: Button1
+Usuario.........: Fabio
+Versão Windows..: Windows 10
+----------------------------------------------------------------------
+Data/Hora.......: 12/04/2022 08:34:41
+Mensagem........: Erro de conversão de tipo
+Classe Exceção..: EDownloadException
+Formulário......: MainForm
+Unit............: Vcl.ComCtrls
+Controle Visual.: Button1
+Usuario.........: fabilson.lima
+Versão Windows..: Windows 10
+----------------------------------------------------------------------
+Data/Hora.......: 12/04/2022 08:37:10
+Mensagem........: Erro de conversão de tipo
+Classe Exceção..: EDownloadException
+Formulário......: MainForm
+Unit............: Vcl.ComCtrls
+Controle Visual.: Button1
+Usuario.........: fabilson.lima
+Versão Windows..: Windows 10
+----------------------------------------------------------------------
+Data/Hora.......: 12/04/2022 08:45:09
+Mensagem........: Erro de conversão de tipo
+Classe Exceção..: EDownloadException
+Formulário......: MainForm
+Unit............: Vcl.ComCtrls
+Controle Visual.: Button1
+Usuario.........: fabilson.lima
+Versão Windows..: Windows 10
+----------------------------------------------------------------------
+Data/Hora.......: 12/04/2022 09:13:51
+Mensagem........: Erro de conversão de tipo
+Classe Exceção..: EDownloadException
+Formulário......: MainForm
+Unit............: Vcl.ComCtrls
+Controle Visual.: Button1
+Usuario.........: fabilson.lima
+Versão Windows..: Windows 10
+----------------------------------------------------------------------
+Data/Hora.......: 12/04/2022 09:15:21
+Mensagem........: Erro de conversão de tipo
+Classe Exceção..: EDownloadException
+Formulário......: MainForm
+Unit............: Vcl.ComCtrls
+Controle Visual.: Button1
+Usuario.........: fabilson.lima
+Versão Windows..: Windows 10
+----------------------------------------------------------------------
+Data/Hora.......: 12/04/2022 09:24:32
+Mensagem........: Erro de conversão de tipo
+Classe Exceção..: EDownloadException
+Formulário......: MainForm
+Unit............: Vcl.ComCtrls
+Controle Visual.: Button1
+Usuario.........: fabilson.lima
+Versão Windows..: Windows 10
+----------------------------------------------------------------------
+Data/Hora.......: 12/04/2022 09:33:44
+Mensagem........: Erro de conversão de tipo
+Classe Exceção..: EDownloadException
+Formulário......: MainForm
+Unit............: Vcl.ComCtrls
+Controle Visual.: Button1
+Usuario.........: fabilson.lima
+Versão Windows..: Windows 10
+----------------------------------------------------------------------
+Data/Hora.......: 12/04/2022 09:34:33
+Mensagem........: Erro de conversão de tipo
+Classe Exceção..: EDownloadException
+Formulário......: MainForm
+Unit............: Vcl.ComCtrls
+Controle Visual.: Button1
+Usuario.........: fabilson.lima
+Versão Windows..: Windows 10
+----------------------------------------------------------------------
+Data/Hora.......: 12/04/2022 09:35:06
+Mensagem........: Erro de conversão de tipo
+Classe Exceção..: EDownloadException
+Formulário......: MainForm
+Unit............: Vcl.ComCtrls
+Controle Visual.: Button1
+Usuario.........: fabilson.lima
+Versão Windows..: Windows 10
+----------------------------------------------------------------------
+Data/Hora.......: 12/04/2022 09:46:42
+Mensagem........: Erro de conversão de tipo
+Classe Exceção..: EDownloadException
+Formulário......: MainForm
+Unit............: Vcl.ComCtrls
+Controle Visual.: Button1
+Usuario.........: fabilson.lima
+Versão Windows..: Windows 10
+----------------------------------------------------------------------
+Data/Hora.......: 12/04/2022 09:48:20
+Mensagem........: Erro de conversão de tipo
+Classe Exceção..: EDownloadException
+Formulário......: MainForm
+Unit............: Vcl.ComCtrls
+Controle Visual.: Button1
+Usuario.........: fabilson.lima
+Versão Windows..: Windows 10
+----------------------------------------------------------------------
+Data/Hora.......: 12/04/2022 09:55:59
+Mensagem........: Erro de conversão de tipo.
+Classe Exceção..: EDownloadException
+Formulário......: MainForm
+Unit............: Vcl.ComCtrls
+Controle Visual.: btnExcecao1
+Usuario.........: fabilson.lima
+Versão Windows..: Windows 10
+----------------------------------------------------------------------
+Data/Hora.......: 12/04/2022 09:56:27
+Mensagem........: Não é possível dividir número por zero.
+Classe Exceção..: EDownloadException
+Formulário......: MainForm
+Unit............: Vcl.ComCtrls
+Controle Visual.: Button2
+Usuario.........: fabilson.lima
+Versão Windows..: Windows 10
+----------------------------------------------------------------------
+Data/Hora.......: 12/04/2022 09:57:14
+Mensagem........: Item inexistente.
+Classe Exceção..: EDownloadException
+Formulário......: MainForm
+Unit............: Vcl.ComCtrls
+Controle Visual.: btnExcecao3
+Usuario.........: fabilson.lima
+Versão Windows..: Windows 10
+----------------------------------------------------------------------
+Data/Hora.......: 12/04/2022 10:04:06
+Mensagem........: Arquivo não localizado.
+Classe Exceção..: EDownloadException
+Formulário......: MainForm
+Unit............: Vcl.ComCtrls
+Controle Visual.: btnExcecao4
+Usuario.........: fabilson.lima
+Versão Windows..: Windows 10
+----------------------------------------------------------------------
+Data/Hora.......: 12/04/2022 10:04:42
+Mensagem........: Erro ao abrir o dataset.
+Classe Exceção..: EDownloadException
+Formulário......: MainForm
+Unit............: Vcl.ComCtrls
+Controle Visual.: btnExcecao5
+Usuario.........: fabilson.lima
+Versão Windows..: Windows 10
+----------------------------------------------------------------------
+Data/Hora.......: 12/04/2022 10:09:33
+Mensagem........: Não foi possível inserir o registro.
+[FireDAC][Phys][SQLite] ERROR: table logdownload has no column named datainicio1
+Classe Exceção..: EDownloadException
+Formulário......: MainForm
+Unit............: Vcl.ExtCtrls
+Controle Visual.: MainForm
+Usuário.........: fabilson.lima
+Versão Windows..: Windows 10
+----------------------------------------------------------------------
+Data/Hora.......: 12/04/2022 10:12:35
+Mensagem........: Não foi possível inserir o registro.
+[FireDAC][Phys][SQLite] ERROR: table logdownload has no column named datainicio1
+Classe Exceção..: EDownloadException
+Formulário......: MainForm
+Unit............: Vcl.ExtCtrls
+Controle Visual.: MainForm
+Usuário.........: fabilson.lima
+Versão Windows..: Windows 10
+----------------------------------------------------------------------
+Data/Hora.......: 12/04/2022 10:16:40
+Mensagem........: Erro de conversão de tipo.
+Classe Exceção..: EDownloadException
+Formulário......: MainForm
+Unit............: Vcl.ComCtrls
+Controle Visual.: btnExcecao1
+Usuário.........: fabilson.lima
+Versão Windows..: Windows 10
+----------------------------------------------------------------------
+Data/Hora.......: 12/04/2022 10:18:47
+Mensagem........: Erro ao abrir o dataset.
+Classe Exceção..: EDownloadException
+Formulário......: MainForm
+Unit............: Vcl.ComCtrls
+Controle Visual.: btnExcecao5
+Usuário.........: fabilson.lima
+Versão Windows..: Windows 10
+----------------------------------------------------------------------
+Data/Hora.......: 12/04/2022 10:19:27
+Mensagem........: Arquivo não localizado.
+Classe Exceção..: EDownloadException
+Formulário......: MainForm
+Unit............: Vcl.ComCtrls
+Controle Visual.: btnExcecao4
+Usuário.........: fabilson.lima
+Versão Windows..: Windows 10
+----------------------------------------------------------------------
+Data/Hora.......: 12/04/2022 10:59:56
+Mensagem........: Não foi possível inserir o registro.
+[FireDAC][Phys][SQLite] ERROR: database table is locked: LOGDOWNLOAD
+Classe Exceção..: EDownloadException
+Formulário......: MainForm
+Unit............: Vcl.ExtCtrls
+Controle Visual.: MainForm
+Usuário.........: fabilson.lima
+Versão Windows..: Windows 10
+----------------------------------------------------------------------
