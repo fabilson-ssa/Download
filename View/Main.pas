@@ -9,8 +9,9 @@ uses
   Vcl.Buttons, Vcl.FileCtrl,
   ExceptionHandler, System.ImageList, Vcl.ImgList, Vcl.VirtualImageList,
   Vcl.BaseImageCollection, Vcl.ImageCollection,
-  Vcl.Samples.Gauges, Data.DB, Vcl.Grids, Vcl.DBGrids,
+  Vcl.Samples.Gauges, Data.DB, DBClient, Vcl.Grids, Vcl.DBGrids,
   System.IOUtils,
+  System.Generics.Collections, System.Contnrs,
   Controller.Interfaces, Controller.HTTPRequest, Controller.Database,
   Download.Types,
   Model.Download,
@@ -52,22 +53,23 @@ type
     sbParar: TButton;
     sbDiretorioPadrao: TButton;
     TabSheet1: TTabSheet;
-    Button1: TButton;
-    Button2: TButton;
-    Button3: TButton;
-    Button4: TButton;
-    Button5: TButton;
+    btnExcecao1: TButton;
+    btnExcecao2: TButton;
+    btnExcecao3: TButton;
+    btnExcecao4: TButton;
+    btnExcecao5: TButton;
+    Panel1: TPanel;
     procedure FormCreate(Sender: TObject);
     procedure sbIniciarClick(Sender: TObject);
     procedure sbPararClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure sbDiretorioPadraoClick(Sender: TObject);
     procedure pcDownloadChange(Sender: TObject);
-    procedure Button1Click(Sender: TObject);
-    procedure Button2Click(Sender: TObject);
-    procedure Button3Click(Sender: TObject);
-    procedure Button4Click(Sender: TObject);
-    procedure Button5Click(Sender: TObject);
+    procedure btnExcecao1Click(Sender: TObject);
+    procedure btnExcecao2Click(Sender: TObject);
+    procedure btnExcecao3Click(Sender: TObject);
+    procedure btnExcecao4Click(Sender: TObject);
+    procedure btnExcecao5Click(Sender: TObject);
 
   private
     { Private declarations }
@@ -144,7 +146,7 @@ var file_name: String;
 begin
   // Verifica se os parâmatros necessários para o download estão presentes.
   // Diretório padrão.
-  if Length(Trim(edDiretorioPadrao.Text)) > 0 then
+  if Length(Trim(edDiretorioPadrao.Text)) = 0 then
     begin
       MessageBox(0, PChar('Um diretório padrão para download precisa ser informado'), PChar('Atenção'), MB_ICONINFORMATION or MB_OK or MB_SYSTEMMODAL);
 
@@ -276,61 +278,78 @@ begin
     end;
 end;
 
-///////////////////////
-procedure TMainForm.Button1Click(Sender: TObject);
+procedure TMainForm.btnExcecao1Click(Sender: TObject);
 begin
   // EConvertError
   try
     StrToInt('A');
   except
-    raise EDownloadException.Create('Erro de conversão de tipo');
+    raise EDownloadException.Create('Erro de conversão de tipo.');
   end;
 end;
 
-procedure TMainForm.Button2Click(Sender: TObject);
+procedure TMainForm.btnExcecao2Click(Sender: TObject);
 var
-  N1: integer;
-  N2: integer;
-  Resultado: integer;
+  N1: Integer;
+  N2: Integer;
+  Resultado: Integer;
 begin
   // EDivByZero
   N1 := 10;
   N2 := 0;
-  Resultado := N1 div N2;
-  ShowMessage(IntToStr(Resultado));
+
+  try
+    Resultado := N1 div N2;
+  except
+    raise EDownloadException.Create('Não é possível dividir número por zero.');
+  end;
 end;
 
-procedure TMainForm.Button3Click(Sender: TObject);
-//var
-//  Lista: TObjectList;
-//  Objeto: TObject;
+procedure TMainForm.btnExcecao3Click(Sender: TObject);
+var
+  Lista: TObjectList;
+  Objeto: TObject;
 begin
   // EListError
-//  Lista := TObjectList.Create;
-//  try
-//    Objeto := Lista.Items[1];
-//    ShowMessage(Objeto.ClassName);
-//  finally
-//    Lista.Free;
-//  end;
+  Lista := TObjectList.Create;
+
+  try
+    Objeto := Lista.Items[1];
+  except
+    Lista.Free;
+
+    raise EDownloadException.Create('Item inexistente.');
+  end;
 end;
 
-procedure TMainForm.Button4Click(Sender: TObject);
+procedure TMainForm.btnExcecao4Click(Sender: TObject);
+var MyText: TStringList;
 begin
   // EFOpenError
-//  Memo.Lines.LoadFromFile('C:\ArquivoInexistente.txt');
+  MyText := TStringList.Create;
+
+  try
+    MyText.LoadFromFile('C:\ArquivoInexistente.txt');
+  except
+    MyText.Free;
+
+    raise EDownloadException.Create('Arquivo não localizado.');
+  end;
 end;
 
-procedure TMainForm.Button5Click(Sender: TObject);
-//var ClientDataSet: TClientDataSet;
+procedure TMainForm.btnExcecao5Click(Sender: TObject);
+var ClientDataSet: TClientDataSet;
 begin
   // EDatabaseError
-//  ClientDataSet := TClientDataSet.Create(nil);
-//  try
-//    ShowMessage(ClientDataSet.FieldByName('Campo').AsString);
-//  finally
-//    ClientDataSet.Free;
-//  end;
+  ClientDataSet := TClientDataSet.Create(nil);
+
+  try
+    ShowMessage(ClientDataSet.FieldByName('campo').AsString);
+  except
+    ClientDataSet.Free;
+
+    raise EDownloadException.Create('Erro ao abrir o dataset.');
+  end;
 end;
 
 

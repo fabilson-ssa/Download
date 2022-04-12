@@ -23,7 +23,7 @@ object MainForm: TMainForm
     Top = 0
     Width = 861
     Height = 401
-    ActivePage = tsDownload
+    ActivePage = TabSheet1
     Align = alClient
     TabOrder = 0
     OnChange = pcDownloadChange
@@ -498,9 +498,9 @@ object MainForm: TMainForm
           Stretch = True
         end
         object plnBotoesAcao: TPanel
-          Left = 696
+          Left = 536
           Top = 13
-          Width = 137
+          Width = 297
           Height = 87
           Anchors = [akTop, akRight, akBottom]
           BevelKind = bkFlat
@@ -509,7 +509,7 @@ object MainForm: TMainForm
           object sbIniciar: TButton
             Left = 8
             Top = 15
-            Width = 53
+            Width = 121
             Height = 53
             Hint = 'Iniciar o download'
             Margins.Left = 0
@@ -517,29 +517,41 @@ object MainForm: TMainForm
             Margins.Right = 0
             Margins.Bottom = 0
             BiDiMode = bdLeftToRight
-            ImageAlignment = iaCenter
+            Caption = 'Iniciar'
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -16
+            Font.Name = 'Segoe UI'
+            Font.Style = [fsBold]
             ImageIndex = 1
             Images = VirtualImageList48
             ParentBiDiMode = False
+            ParentFont = False
             ParentShowHint = False
             ShowHint = True
             TabOrder = 0
             OnClick = sbIniciarClick
           end
           object sbParar: TButton
-            Left = 72
+            Left = 160
             Top = 15
-            Width = 53
+            Width = 121
             Height = 53
             Hint = 'Parar o download'
             Margins.Left = 0
             Margins.Top = 0
             Margins.Right = 0
             Margins.Bottom = 0
+            Caption = 'Parar'
             Enabled = False
-            ImageAlignment = iaCenter
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -16
+            Font.Name = 'Segoe UI'
+            Font.Style = [fsBold]
             ImageIndex = 3
             Images = VirtualImageList48
+            ParentFont = False
             ParentShowHint = False
             PressedImageIndex = 6
             ShowHint = True
@@ -552,10 +564,6 @@ object MainForm: TMainForm
     object tsHistorico: TTabSheet
       Caption = 'Hist'#243'rico'
       ImageIndex = 2
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object grdHistorico: TDBGrid
         AlignWithMargins = True
         Left = 5
@@ -639,50 +647,74 @@ object MainForm: TMainForm
     object TabSheet1: TTabSheet
       Caption = 'Teste Exce'#231#245'es'
       ImageIndex = 2
-      object Button1: TButton
-        Left = 8
-        Top = 8
+      object btnExcecao1: TButton
+        Left = 3
+        Top = 48
         Width = 220
         Height = 40
         Caption = 'Gerar exce'#231#227'o de convers'#227'o'
         TabOrder = 0
-        OnClick = Button1Click
+        OnClick = btnExcecao1Click
       end
-      object Button2: TButton
-        Left = 8
-        Top = 66
+      object btnExcecao2: TButton
+        Left = 3
+        Top = 99
         Width = 220
         Height = 40
         Caption = 'Gerar exce'#231#227'o de divis'#227'o por zero'
         TabOrder = 1
-        OnClick = Button2Click
+        OnClick = btnExcecao2Click
       end
-      object Button3: TButton
-        Left = 8
-        Top = 124
+      object btnExcecao3: TButton
+        Left = 3
+        Top = 150
         Width = 220
         Height = 40
         Caption = 'Gerar exce'#231#227'o de '#237'ndice de lista'
         TabOrder = 2
-        OnClick = Button3Click
+        OnClick = btnExcecao3Click
       end
-      object Button4: TButton
-        Left = 8
-        Top = 182
+      object btnExcecao4: TButton
+        Left = 3
+        Top = 201
         Width = 220
         Height = 40
         Caption = 'Gerar exce'#231#227'o de arquivo n'#227'o encontrado'
         TabOrder = 3
-        OnClick = Button4Click
+        OnClick = btnExcecao4Click
       end
-      object Button5: TButton
-        Left = 8
-        Top = 240
+      object btnExcecao5: TButton
+        Left = 3
+        Top = 252
         Width = 220
         Height = 40
         Caption = 'Gerar exce'#231#227'o de campo n'#227'o encontrado'
         TabOrder = 4
-        OnClick = Button5Click
+        OnClick = btnExcecao5Click
+      end
+      object Panel1: TPanel
+        AlignWithMargins = True
+        Left = 5
+        Top = 5
+        Width = 843
+        Height = 33
+        Margins.Left = 5
+        Margins.Top = 5
+        Margins.Right = 5
+        Margins.Bottom = 5
+        Align = alTop
+        BevelOuter = bvNone
+        Caption = #193'rea reservada para os testes no tratamento de exce'#231#227'o.'
+        Color = 13731361
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWhite
+        Font.Height = -19
+        Font.Name = 'Segoe UI Semibold'
+        Font.Style = [fsBold]
+        ParentBackground = False
+        ParentFont = False
+        TabOrder = 5
+        ExplicitTop = 63
       end
     end
   end
@@ -842,97 +874,6 @@ object MainForm: TMainForm
               E9FFDEDE806B775CC1ECBD9B9D445F59222222222222222222ED75078C6974AD
               D8E6BBDF0000000049454E44AE426082}
           end>
-      end
-      item
-        Name = 'play_grayed'
-        SourceImages = <
-          item
-            Image.Data = {
-              89504E470D0A1A0A0000000D4948445200000060000000600806000000E29877
-              3800000006624B474400FF00FF00FFA0BDA7930000036449444154789CEDDDCF
-              4A1B5114C7F1DFCC44836383082228D888887F32948218F7FDB7A8AFA1D0BDF4
-              354A4B69C1853E47C1DA3E4070D185ED46886347448420D334A2D1F17651235D
-              54EABD137BEE9FF3D99FE130DF38CC986800C618638C31C618638C31E60A2FEF
-              01B6B6B61E005806F004C03880FEBCC7D45C0B400C605308B156AD56B7F31C4C
-              39C0CECE4E314DD3D7005E00F0F32C61B04C08B11A86E14A14456D95032805B8
-              3AF91F003C5299B7D0E7BEBEBEE72A11945EB9699ABE019FFC3F3D3E3D3D7DA5
-              3228FD137075CDFF02772F3B37C92E2F2F1F2E2C2C7C9519523989CB8A73B60B
-              822058921D5239914F15669C208478263BA312E0BEC28C2BCAB2032A01EE29CC
-              B8A2243BC0D772621C80180720C601887100621C80180720C601887100621C80
-              180720A67D80898909044140BDC69DD13EC0E0E0202A950AFAFBED7CAF5FFB00
-              00D0DBDB8BE9E9698C8E8E52AFD27546040000CFF330323282A9A929F4F4F450
-              AFD335C604E828954AA8542A181818A05EA52B8C0B0000854201939393181B1B
-              83E7E5FE6C19292303740C0F0F63666606C562917A156546070080300C313B3B
-              8BA1A121EA5594181F0000822040B95C36F299C18A001D263E3358150030EF99
-              C1BA008059CF0C5606E830E199C1EA0080FECF0CD607E8D0F599C19900809ECF
-              0C4E05E8104250AF70AD40BDC0FF747272827ABD8EB3B333EA55AE3913E0E8E8
-              08FBFBFB5ABDFA0107025C5C5C208E63A4694ABDCA5F591DA0D96C62777717E7
-              E7E7D4ABDCC8CA0042081C1E1EE2E0E0807A957FB22E40BBDD46BD5E47ABD5A2
-              5EE556AC0A707C7C8CBDBD3D645946BDCAAD591120CB3224498246A341BD8A34
-              E303E8786F2FC3E800BADEDBCB303280EEF7F6328C0B60C2BDBD0C630298746F
-              2FC38800A6DDDBCBD03E40A3D140922446DDDBCBD03E401CC7D42BDC2927DF90
-              D1090720C601887100621C80180720C601887100621C80180720C60188A90468
-              767D0B7BFC901D50099028CCB8E2BBEC804A808F0A33AED8901D900E20845803
-              60E72FE7F3C97CDF5F971D920E50AD56B78510ABB2730E783F3737F74D7648E9
-              2E280CC31521C42795591B799EB709E0A5CAAC5280288ADA61182E7A9EF70E6E
-              5F8E32006F85108BF3F3F34A1FD3C8FD6783B55A2D0A8260E9EACB0BC661FFBF
-              B7FF89DF5F63B5E1FBFEBACA658731C618638C31C618638CB9E9179AA6F3DD20
-              840D8C0000000049454E44AE426082}
-          end>
-      end
-      item
-        Name = 'pause_grayed'
-        SourceImages = <
-          item
-            Image.Data = {
-              89504E470D0A1A0A0000000D4948445200000060000000600806000000E29877
-              3800000006624B474400FF00FF00FFA0BDA7930000022849444154789CEDDD4B
-              8A13511886E1EF2F1B27EA16B4C7363848D5128C937617B603E70D2E42A411E9
-              59F732048D3B2848C041D461E312BC40C098E3A0025EF0C239D5F61753EF330D
-              7FA5A837A7A84191230100000000006028A2EF01DAB6DD8B888388184BDA9574
-              A5FF696DB44F92CE2262121127A3D1E8759F83150798CFE797178BC5E394D203
-              4997FA9CC47FEC8BA46349874DD37C2E39405180F5C57F9652BA5D32BF855E4A
-              DA2F8950957CDBFA97CFC5FF662CE951C960F60A68DB76AFAAAA571AEE6DE777
-              961171ABAEEB373943D92BA0AAAAFBE2E2FFCA4E4AE92077A8E416342E98198A
-              3BB9032501AE17CC0CC58DDC819200570B6686E25AEE40D15310CE0F01CC0860
-              460033029811C08C0066043023801901CC0860460033029811C08C00663BEE13
-              F8595DD77FFC7C3A9DFED3F98BC60A3023801901CC0860460033029811C08C00
-              66043023801901CC0860460033029811C08C0066043023801901CC0860460033
-              029811C06CE3DE0BEAFBDECEA6BDF7F337AC0033029811C08C00660430238019
-              01CC0860460033029811C08C0066043023801901CC4A027C38F7B3D81EEF7307
-              4A02BC2B98198AEC6B931D202226B93303F23C77A024C089BA9D23F0A3A5A4D3
-              DCA1EC00EB3D538E73E7B65D443C6D9AE66DEE5CE953D0A1BA6D3BD099A4941E
-              960C160558EF95B22FE989BAA53754CB88389274F74237F1F9DE6C36BBB95AAD
-              EEA9DBBC6057DBFFF7F61F259D497A1111A7B95B9600000000000060B8BE02B1
-              E4623304DD3FD10000000049454E44AE426082}
-          end>
-      end
-      item
-        Name = 'stop_grayed'
-        SourceImages = <
-          item
-            Image.Data = {
-              89504E470D0A1A0A0000000D4948445200000060000000600806000000E29877
-              3800000006624B474400FF00FF00FFA0BDA7930000022349444154789CEDDDCF
-              6A13511886F1F79B1637DA5BD0AE2DB8C8CC251837F52EAC0BF7052F42A48874
-              D75E86A0F10E061270117559BC04FF40C098E362025AD1C539697CD3CCF3DB7F
-              27C33C39C32C428E04000000000080BE88551768DBF620228E226228695FD2CD
-              D52F6BA37D93741111A388381B0C06EF5759AC38C0743ABD319BCD9EA7949E48
-              DA59E522AEB11F924E251D374DF3BD6481A200CB9BFF2AA574BF647E0BBD9574
-              5812A12AF9B4E5379F9BFFCB50D2B392C1EC1DD0B6ED415555EFD4DFC7CEBFCC
-              23E25E5DD71F7286B2774055558FC5CDFF9BDD94D251EE50C923685830D3170F
-              72074A02DC2E98E98B3BB90325016E15CCF4C55EEE40D15B10AE0E01CC086046
-              0033029811C08C0066043023801901CC0860460033029811C08C0066BBEE0BF8
-              535DD76B5D7F3C1EAF75FD5CEC0033029811C08C0066043023801901CC086046
-              0033029811C08C0066043023801901CC0860460033029811C08C006604302380
-              1901CC36EE77419BF6BB9D7563079811C08C0066043023801901CC0860460033
-              029811C08C0066043023801901CC08605612E0CB955FC5F6F89C3B5012E053C1
-              4C5F64DF9BEC001131CA9DE991D7B9032501CED49D1C81CBE692CE7387B2032C
-              CF4C39CD9DDB7611F1B2699A8FB973A56F41C7EA8EED406794527A5A32581460
-              7956CAA1A417EAB65E5FCD23E244D2C3FF7A88CFEF2693C9DDC562F148DDE105
-              FBDAFEBFB7FF2AE942D29B8838CF3DB204000000000000FDF513F7C35CCC8E9B
-              A3600000000049454E44AE426082}
-          end>
       end>
     Left = 164
     Top = 336
@@ -964,24 +905,6 @@ object MainForm: TMainForm
         CollectionName = 'stop'
         Disabled = False
         Name = 'stop'
-      end
-      item
-        CollectionIndex = 4
-        CollectionName = 'play_grayed'
-        Disabled = False
-        Name = 'play_grayed'
-      end
-      item
-        CollectionIndex = 5
-        CollectionName = 'pause_grayed'
-        Disabled = False
-        Name = 'pause_grayed'
-      end
-      item
-        CollectionIndex = 6
-        CollectionName = 'stop_grayed'
-        Disabled = False
-        Name = 'stop_grayed'
       end>
     ImageCollection = ImageCollection
     Width = 48
@@ -993,11 +916,11 @@ object MainForm: TMainForm
     FavoriteLinks = <>
     FileTypes = <>
     Options = [fdoPickFolders]
-    Left = 492
+    Left = 396
     Top = 280
   end
   object dsHistorico: TDataSource
-    Left = 588
+    Left = 484
     Top = 280
   end
 end

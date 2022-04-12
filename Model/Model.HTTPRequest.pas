@@ -265,6 +265,8 @@ begin
 
           FModelDownload.ProgressPercentage := 100;
 
+          FreeAndNil(FModelLogDownload);
+
           // Atribui ao objeto, o status de "Finalizado com sucesso".
           FModelDownload.Status := TDownloadStatus.Succeeded;
 

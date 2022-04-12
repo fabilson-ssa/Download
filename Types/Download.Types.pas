@@ -15,7 +15,7 @@ type
     function ToString: String;
   end;
 
-  FDownloadException = class(Exception);
+  EDownloadException = class(Exception);
 
 implementation
 

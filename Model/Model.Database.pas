@@ -14,6 +14,7 @@ uses
   FireDAC.Comp.DataSet, FireDAC.Comp.Client, FireDAC.Comp.UI,
   FireDAC.VCLUI.Error,
   FireDAC.Moni.Base, FireDAC.Moni.RemoteClient,
+  Download.Types,
   Model.LogDownload;
 
 type
@@ -79,13 +80,15 @@ begin
           Connection.Connected := True;
         except
           on E: EDatabaseError do
-            raise Exception.Create('Exception: ' + E.Message);
+            // Exemplo de tratamento de exceção.
+            raise EDownloadException.Create('Exception: ' + E.Message);
         end;
 
       end
     else
       begin
-        MessageBox(0, PChar('Não foi possível localizar a tabela necessária a aplicação'), PChar('Atenção'), MB_ICONERROR or MB_OK or MB_SYSTEMMODAL);
+        // Exemplo de tratamento de exceção.
+        raise EDownloadException.Create('Não foi possível localizar a tabela necessária a aplicação');
 
         Application.Terminate;
       end;
@@ -126,7 +129,8 @@ begin
   except
     on E: EDatabaseError do
       begin
-        MessageBox(0, PChar('Não foi possível inserir o registro.' +#13+#10 + E.Message), PChar('Atenção'), MB_ICONQUESTION or MB_OK or MB_SYSTEMMODAL);
+        // Exemplo de tratamento de exceção.
+        raise EDownloadException.Create('Não foi possível inserir o registro.' +#13+#10 + E.Message);
 
         Result := nil;
       end;
@@ -149,7 +153,8 @@ begin
   except
     on E: EDatabaseError do
       begin
-        MessageBox(0, PChar('Não foi possível atualizar o registro.' +#13+#10 + E.Message), PChar('Atenção'), MB_ICONQUESTION or MB_OK or MB_SYSTEMMODAL)
+        // Exemplo de tratamento de exceção.
+        raise EDownloadException.Create('Não foi possível atualizar o registro.' +#13+#10 + E.Message);
       end;
   end;
 end;
@@ -171,7 +176,8 @@ begin
   except
     on E: EDatabaseError do
       begin
-        MessageBox(0, PChar('Não foi possível atualizar o registro.' +#13+#10 + E.Message), PChar('Atenção'), MB_ICONQUESTION or MB_OK or MB_SYSTEMMODAL)
+        // Exemplo de tratamento de exceção.
+        raise EDownloadException.Create('Não foi possível atualizar o registro.' +#13+#10 + E.Message);
       end;
   end;
 
