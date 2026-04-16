@@ -1,61 +1,125 @@
+﻿# Download (Delphi)
 
-# Download
-Projeto desenvolvido em Delphi e destinado a realizar download de arquivos, a partir de um endereço informado.
+Aplicação desktop em Delphi para download de arquivos via URL, com execução em background, histórico em SQLite e tratamento centralizado de exceções.
 
-## Tecnologias utilizadas
-- Padrão de arquitetura de software MVC
-	- O MVC é utilizado em muitos projetos devido a arquitetura que possui, o que possibilita a divisão do projeto em camadas muito bem definidas. Cada uma delas, o **Model**, o **Controller** e a **View**, executa o que lhe é definido e nada mais do que isso.
-	
-- MultiThread 
-	- A utilização de threads nas aplicações é um diferencial que traz diversas vantagens para o usuário final, uma vez que podem aumentar o desempenho da mesma. Elas permitem que as tarefas possam ser executadas em paralelo ao fluxo principal da aplicação, possibilitando assim que a mesma continue acessível ao usuário.
-	
-- Padrão de projeto Observer
-	- O padrão de projeto **Observer** foi elaborado para permitir que objetos recebam dados ou notificações sem o conhecimento de quem é o objeto emissor. Dessa forma, alcançamos um baixo acoplamento na arquitetura, já que fortes dependências não são estabelecidas. A qualquer momento, podemos substituir o emissor ou os receptores sem prejudicar a funcionalidade existente. Pode-se dizer, portanto, que a proposta primária do _Observer_ envolve a recepção de notificações quando determinado evento ocorre em um objeto assistido.
+![Status](https://img.shields.io/badge/status-em%20desenvolvimento-blue)
+![Delphi](https://img.shields.io/badge/Delphi-VCL-E62431)
+![Database](https://img.shields.io/badge/Database-SQLite-003B57)
+![Platform](https://img.shields.io/badge/Platform-Windows-0078D6)
 
-- **SOLID**
-	- **SOLID** é um acrônimo criado por [Michael Feathers](https://michaelfeathers.silvrback.com/), após observar que cinco princípios da orientação a objetos e design de código, criados por [_Robert C. Martin_](https://pt.wikipedia.org/wiki/Robert_Cecil_Martin) (a.k.a. _Uncle Bob) e abordados no artigo_ [The Principles of OOD](http://butunclebob.com/ArticleS.UncleBob.PrinciplesOfOod)  poderiam se encaixar nesta palavra.
-			
-		-   _**S**ingle Responsibility Principle_: Princípio da responsabilidade única;
-		-   _**O**pen Closed Principle_: Princípio do aberto/fechado;
-		-   _**L**iskov Substitution Principle_: Princípio da substituição de Liskov;
-		-   _**I**nterface Segregation Principle:_ Princípio da segregação de  _Interfaces_;
-		-   _**D**ependency Inversion Principle:_ Princípio da inversão de dependência.
+## Visão Geral
 
-## SQLite
-Cada download efetivamente realizado é armazenado em uma base de dados SQLite. O arquivo (database.db), referente ao banco, se encontra na pasta: "\bin\database\".
+Este projeto foi construído para demonstrar uma aplicação desktop Delphi com:
 
-## Compatibilidade
+- Interface VCL desacoplada em camadas.
+- Download HTTP/HTTPS com atualização de progresso.
+- Persistência de histórico em SQLite.
+- Log técnico de exceções com captura de tela.
 
-Download é compatível com 
-- Delphi 11 Alexandria
-- Delphi 10.4 Sydney
-- Delphi 10.3 Rio
-- Delphi 10.2 Tokyo
-- Delphi 10.1 Berlin
- 
-## Começando
+## Demo
 
-Para visualizar o projeto, será necessário instalar os seguintes programas:
+- Vídeo: [demo.mp4](Demo/demo.mp4)
 
-- Delphi
-- Gerenciador de banco de dados SQLite
+## Screenshots
 
-## Documentação
+![Tela de Download 1](docs/assets/tela-download-1.png)
+![Tela de Download 2](docs/assets/tela-download-2.png)
 
-A documentação do projeto ainda está em desenvolvimento.
+## Arquitetura
 
-## Desenvolvimento
+### Camadas
 
-Desenvolvido em Delphi, utilizando a base de dados SQLite.
+- `View`: eventos de tela e atualização visual.
+- `Controller`: orquestração entre interface e regras de negócio.
+- `Model`: HTTP request, entidades de download e persistência.
+- `Exception`: captura global de erros e escrita de logs.
+- `Utils` e `Types`: utilitários e tipos compartilhados.
 
-## Construção (Build)
+### Diagrama (alto nível)
 
-Para fazer o build utilize, no Delphi a combinação de teclas Shift+F9 no projeto principal.
+```mermaid
+flowchart LR
+    U[Usuário] --> V[View MainForm]
+    V --> C[Controller]
+    C --> M[Model HTTPRequest]
+    M --> H[Indy TIdHTTP]
+    M --> DB[(SQLite)]
+    M --> O[Observers]
+    O --> V
+    E[Exception Handler] --> L[Log txt + Screenshot]
+    V --> E
+    C --> E
+    M --> E
+```
 
-## Testes
+## Fluxo da Aplicação
 
-Não há testes disponíveis no fonte.
+1. Usuário informa URL e diretório de destino.
+2. `Controller` inicia o processo de download no `Model`.
+3. `Model` executa download em task/thread e notifica progresso (Observer).
+4. `View` atualiza barra de progresso e tamanho atual do arquivo.
+5. Em sucesso, grava fim do download no SQLite; em erro, registra exceção.
+
+## Stack Técnica
+
+- Delphi VCL (`.dproj`)
+- Indy (`TIdHTTP`, SSL handler)
+- SQLite (FireDAC)
+- Padrões: MVC, Observer, princípios SOLID
+
+## Requisitos
+
+- Windows
+- Delphi com suporte ao projeto `Download.dproj`
+- Dependências de runtime:
+  - `bin/libeay32.dll`
+  - `bin/ssleay32.dll`
+  - `bin/database/sqlite3.dll`
+
+## Quick Start
+
+```bash
+git clone https://github.com/fabilson-ssa/Download.git
+```
+
+1. Abrir `Download.dproj` no Delphi.
+2. Compilar (`Shift + F9`).
+3. Executar a aplicação.
+4. Testar download com uma URL pública.
+
+## Estrutura do Projeto
+
+```text
+Controller/   # Interfaces e orquestração
+Model/        # Regras de negócio, HTTP e banco
+View/         # Formulário principal e UI
+Exception/    # Tratamento global de exceções
+Types/        # Tipos e enums
+Utils/        # Helpers
+Demo/         # Arquivo de demonstração
+bin/          # Executável, DLLs, banco e logs
+```
+
+## Persistência e Observabilidade
+
+- Banco: `bin/database/database.db`
+- Tabela principal: `logdownload`
+- Log de exceções: `bin/log/log.txt`
+- Capturas de erro: `bin/log/screenshots/`
+
+## Limitações Atuais
+
+- Sem testes automatizados.
+- Fluxo atual orientado a um download por vez.
+- Validação de disponibilidade depende de `HEAD` e `Content-Length`.
+
+## Roadmap
+
+- Suporte a downloads simultâneos.
+- Retentativas automáticas para falhas de rede.
+- Suíte de testes unitários para `Model` e `Controller`.
+- Definição de licença (ex.: MIT).
 
 ## Contribuições
 
-Contribuições sempre são bem vidas e somente serão aceitas por meio dos canais oficiais.
+Issues e pull requests são bem-vindos.
